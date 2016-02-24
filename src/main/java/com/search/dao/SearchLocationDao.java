@@ -22,7 +22,7 @@ public class SearchLocationDao extends HibernateDaoSupport{
 	public long getCount(){
 		DetachedCriteria criteria = DetachedCriteria.forClass(SearchLocation.class);
 		criteria.setProjection(Projections.rowCount());
-		return (long) getHibernateTemplate().findByCriteria(criteria).get(0);
+		return ((Long) getHibernateTemplate().findByCriteria(criteria).get(0)).longValue();
 	}
 	
 	public ArrayList<SearchLocation> search(String query){
