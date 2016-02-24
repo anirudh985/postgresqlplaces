@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+	<class name="com.search.objects.SearchLocation" table="LOCATION">
+		<id column="INT_ROW_ID" name="intRowId" >
+		<generator class="increment"/>
+		</id>
+		<property name="locName" column="LOC_NAME"/>
+		<property name="category" column="CATEGORY"/>
+		<property name="rating" column="RATING"/>
+		<property name="latitude" column="LATITUDE"/>
+		<property name="longitude" column="LONGITUDE"/>
+	</class>
+</hibernate-mapping>
