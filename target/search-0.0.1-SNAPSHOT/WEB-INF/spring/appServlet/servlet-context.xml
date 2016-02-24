@@ -67,7 +67,7 @@
         <beans:property name="password" value="root" />
     </beans:bean> -->
     
-   <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <!-- <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mappingResources">
 			<beans:list>
@@ -78,7 +78,33 @@
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</beans:prop>
 				<beans:prop key="hibernate.connection.driver_class">org.postgresql.Driver</beans:prop>
-				<beans:prop key="hibernate.connection.url">jdbc:postgresql://localhost:5432/testdb</beans:prop>
+				<beans:prop key="hibernate.connection.url">#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }</beans:prop>
+				<beans:prop key="hibernate.connection.username">postgres</beans:prop>
+				<beans:prop key="hibernate.connection.password">root</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="org.postgresql.Driver" />
+        <beans:property name="url" value="#{ 'jdbc:postgresql://'  +@dbUrl.getHost() + '': + @dbUrl.getPort() + @dbUrl.getPath() }" />
+        <beans:property name="username" value="postgres" />
+        <beans:property name="password" value="root" />
+    </beans:bean> -->
+    
+    
+    <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mappingResources">
+			<beans:list>
+				<beans:value>com/search/resources/SearchLocation.hbm.xml</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</beans:prop>
+				<beans:prop key="hibernate.connection.driver_class">org.postgresql.Driver</beans:prop>
+				<beans:prop key="hibernate.connection.url">jdbc:postgresql://localhost:8080/testdb</beans:prop>
 				<beans:prop key="hibernate.connection.username">postgres</beans:prop>
 				<beans:prop key="hibernate.connection.password">root</beans:prop>
 			</beans:props>
@@ -92,4 +118,7 @@
         <beans:property name="password" value="root" />
     </beans:bean>
     
+    <!-- <beans:bean class="java.net.URI" id="dbUrl">
+      <beans:constructor-arg value="postgres://postgres:root@localhost:8080/testdb"/>
+    </beans:bean> -->
 </beans:beans>
