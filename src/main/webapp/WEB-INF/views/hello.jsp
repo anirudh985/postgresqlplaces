@@ -129,7 +129,7 @@
     	});
     </script>
     
- 	<script>
+ 	<script type="text/javascript">
 
 		function initialize(lat,lon) {
 			var userLatLng = new google.maps.LatLng(lat,lon)
