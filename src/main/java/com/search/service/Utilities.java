@@ -9,4 +9,5 @@ public interface Utilities {
 	public ArrayList<SearchLocation> getList();
 	public ArrayList<SearchLocation> search(String query);
 	public ArrayList<SearchLocation> searchMulti(String name, String category);
+	public ArrayList<SearchLocation> searchMulti(SearchLocation placeQuery);
 }

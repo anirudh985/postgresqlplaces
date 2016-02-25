@@ -37,11 +37,7 @@ public class SearchLocationDao extends HibernateDaoSupport{
 		DetachedCriteria criteria = DetachedCriteria.forClass(SearchLocation.class);
 		Criterion locCriteria = Restrictions.like("locName", locNameValue, MatchMode.ANYWHERE);
 		Criterion categoryCriteria = Restrictions.like("category", categoryValue, MatchMode.ANYWHERE);
-		if(locNameValue != null && categoryValue != null)
-			criteria.add(Restrictions.and(locCriteria, categoryCriteria));
-		else
-			criteria.add(Restrictions.or(locCriteria, categoryCriteria));
-		
+		criteria.add(Restrictions.or(locCriteria, categoryCriteria));
 		return (ArrayList<SearchLocation>) getHibernateTemplate().findByCriteria(criteria);
 	}
 
@@ -49,11 +45,12 @@ public class SearchLocationDao extends HibernateDaoSupport{
 		DetachedCriteria criteria = DetachedCriteria.forClass(SearchLocation.class);
 		Criterion locCriteria = Restrictions.like("locName", "%"+name+"%", MatchMode.ANYWHERE);
 		Criterion categoryCriteria = Restrictions.like("category", "%"+category+"%", MatchMode.ANYWHERE);
-		if(name != null && category != null)
-			criteria.add(Restrictions.and(locCriteria, categoryCriteria));
-		else
-			criteria.add(Restrictions.or(locCriteria, categoryCriteria));
-		
+		criteria.add(Restrictions.or(locCriteria, categoryCriteria));
 		return (ArrayList<SearchLocation>) getHibernateTemplate().findByCriteria(criteria);
 	}
+
+	public ArrayList<SearchLocation> searchMulti(SearchLocation placeQuery) {
+		return searchMulti(placeQuery.getLocName(), placeQuery.getCategory());
+	}
+
 }

@@ -21,14 +21,24 @@
     <h1 style="text-align:left; float:left">Place Lookup</h1>
 	 <h3 id="totalCount" style="text-align:right; float:right"><span class="label label-default">Total Places: </span></h3>
 	 
+	 <br/><br/><br/><br/>
+	 	<div class="col-lg-6">
+    		<div class="input-group">
+      			<input id ="searchInput" type="text" class="form-control" placeholder="Search(by name or category)">
+      			<span class="input-group-btn">
+        			<button class="btn btn-default" type="submit" id="fetchPlaces">Search</button>
+      			</span>
+    		</div><!-- /input-group -->
+  		</div><!-- /.col-lg-6 -->
+  
+  
 	<table class="data-contacts-js table table-striped" id="dataTable">
 		<thead>
 			<tr>
 				<th> Place </th>
 				<th> Category </th>
 				<th> Rating </th>
-				<th> Latitude </th>
-				<th> Longitude </th>
+				<th> Map </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -36,8 +46,8 @@
 		</tbody>
 	</table>
 	
-	<input type="text" style="text-align:center; float:center">
-	<button id="fetchPlaces" class = "btn btn-default" type = "submit">Fetch Places</button>
+	<br/><br/>
+	<div id="googleMap" style="width:500px;height:380px;text-align: center; float: center"></div>
 	
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -45,38 +55,67 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="resources/bootstrap.min.js"></script>
     
+    <script src="http://maps.googleapis.com/maps/api/js"> </script>
+    
+
     <script type="text/javascript">
+	    $("#searchInput").keyup(function(event){
+	        if(event.keyCode == 13){
+	            $("#fetchPlaces").click();
+	        }
+	    });
+    
 	    $("#fetchPlaces").bind("click", function() {
 	
 	    	$("#dataTable > tbody").empty();
 	    	
-	        $.get("/list", function(data) {
-	
-	            $.each(data, function(i, place) {
-	
-	                $(".data-contacts-js").append(
-	                    "<tr><td>" + place.locName + "</td>" +
-	                    "<td>" + place.category + "</td>" +
-	                    "<td>" + place.rating + "</td>" +
-	                    "<td>" + place.latitude + "</td>" +
-	                    "<td>" + place.longitude + "</td></tr>");
-	            });
-	        });
+	    	var searchInput = $("#searchInput").val()
+	    	if(jQuery.trim(searchInput).length > 0){
+	    		jQuery.ajax(
+					{
+	    				url : "/app/searchMulti",
+	    				type: 'POST',
+	    				contentType : "application/json",
+	    				data: JSON.stringify({'locName':searchInput, 'category':searchInput}),
+	    				success:function(data) { 
+	    					$.each(data, function(i, place) {
+	    		                $(".data-contacts-js").append(
+	    		                    "<tr><td>" + place.locName + "</td>" +
+	    		                    "<td>" + place.category + "</td>" +
+	    		                    "<td>" + place.rating + "</td>" +
+	    		                    "<td> <p id='map' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </td></tr>");
+	    		            });	
+	    				},
+	    				error: function() {}
+	    			}
+	    		);
+	    	} 
+	    	else{
+	    		$.get("/app/list", function(data) {
+	    			
+		            $.each(data, function(i, place) {
+		
+		                $(".data-contacts-js").append(
+		                    "<tr><td>" + place.locName + "</td>" +
+		                    "<td>" + place.category + "</td>" +
+		                    "<td>" + place.rating + "</td>" +
+		                    "<td> <p id='map' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </td></tr>");
+		            });
+		        });
+	    	}
 	    });
 	    
 	    
 	    
 	    $("#dataTable").ready(function() {
-	    	
-	        $.get("/list", function(data) {
-	
+	        $.get("/app/list", function(data) {
+
 	            $.each(data, function(i, place) {
 	                $(".data-contacts-js").append(
 	                    "<tr><td>" + place.locName + "</td>" +
 	                    "<td>" + place.category + "</td>" +
 	                    "<td>" + place.rating + "</td>" +
-	                    "<td>" + place.latitude + "</td>" +
-	                    "<td>" + place.longitude + "</td></tr>");
+	                    "<td> <p id='map' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </td></tr>");
 	            });
 	        });
 	    });
@@ -84,10 +123,27 @@
     
     <script type="text/javascript">
     	$("#totalCount").ready(function(){
-    		$.get("/count", function(data) {
+    		$.get("/app/count", function(data) {
     			$("#totalCount").append("<span class=\"label label-default\">" + data + "</span>");
     		});
     	});
     </script>
+    
+ 	<script>
+
+		function initialize(lat,lon) {
+			var userLatLng = new google.maps.LatLng(lat,lon)
+			var mapProp = {
+				center : userLatLng,
+				zoom : 16,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+			var mapObject = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			new google.maps.Marker({map: mapObject, position: userLatLng });
+			
+		}		
+	        google.maps.event.addDomListener(window, 'load', initialize(51.508742,-0.120850));
+	</script>
+
   </body>
 </html>

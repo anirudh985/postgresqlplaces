@@ -42,7 +42,7 @@
 		<beans:property name="sessionFactory" ref="sessionFactory"/>
 	</beans:bean>
 	
-	 <!-- <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	 <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mappingResources">
 			<beans:list>
@@ -53,19 +53,19 @@
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
 				<beans:prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</beans:prop>
-				<beans:prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/test</beans:prop>
-				<beans:prop key="hibernate.connection.username">root</beans:prop>
-				<beans:prop key="hibernate.connection.password">root</beans:prop>
+				<beans:prop key="hibernate.connection.url">jdbc:mysql://db4free.net:3306/xeonziondb</beans:prop>
+				<beans:prop key="hibernate.connection.username">xeonzion</beans:prop>
+				<beans:prop key="hibernate.connection.password">zionxeon</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
 
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <beans:property name="url" value="jdbc:mysql://localhost:3306/test" />
-        <beans:property name="username" value="root" />
-        <beans:property name="password" value="root" />
-    </beans:bean> -->
+        <beans:property name="url" value="jdbc:mysql://db4free.net:3306/xeonziondb" />
+        <beans:property name="username" value="xeonzion" />
+        <beans:property name="password" value="zionxeon" />
+    </beans:bean>
     
     <!-- <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
@@ -97,22 +97,29 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mappingResources">
 			<beans:list>
-				<beans:value>SearchLocation.hbm.xml</beans:value>
+				<beans:value>com/search/resources/SearchLocation.hbm.xml</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</beans:prop>
 				<beans:prop key="hibernate.connection.driver_class">org.postgresql.Driver</beans:prop>
+<<<<<<< Updated upstream
 				<beans:prop key="hibernate.connection.url">#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }</beans:prop>
 				<beans:prop key="hibernate.connection.username">#{ @dbUrl.getUserInfo().split(':')[0] }</beans:prop>
 				<beans:prop key="hibernate.connection.password">#{ @dbUrl.getUserInfo().split(':')[1] }</beans:prop>
+=======
+				<beans:prop key="hibernate.connection.url">jdbc:postgresql://localhost:5432/testdb</beans:prop>
+				<beans:prop key="hibernate.connection.username">postgres</beans:prop>
+				<beans:prop key="hibernate.connection.password">root</beans:prop>
+>>>>>>> Stashed changes
 			</beans:props>
 		</beans:property>
 	</beans:bean>
 
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <beans:property name="driverClassName" value="org.postgresql.Driver" />
+<<<<<<< Updated upstream
         <beans:property name="url" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" />
         <beans:property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }" />
         <beans:property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
@@ -124,11 +131,28 @@
      
      
      
-      <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+      <!-- <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mappingResources">
 			<beans:list>
 				<beans:value>SearchLocation.hbm.xml</beans:value>
+        <beans:property name="url" value="jdbc:postgresql://localhost:5432/testdb" />
+        <beans:property name="username" value="postgres" />
+        <beans:property name="password" value="root" />
+    </beans:bean> -->
+    
+    <!-- <beans:bean class="java.net.URI" id="dbUrl">
+      <beans:constructor-arg value="postgres://postgres:root@localhost:8080/testdb"/>
+    </beans:bean> -->
+    
+    
+    
+   <!--  <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mappingResources">
+			<beans:list>
+				<beans:value>com/search/resources/SearchLocation.hbm.xml</beans:value>
+>>>>>>> Stashed changes
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -143,9 +167,16 @@
 	</beans:bean>
 
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<<<<<<< Updated upstream
         	<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
         	<beans:property name="url" value="jdbc:mysql://db4free.net:3306/xeonziondb" />
         	<beans:property name="username" value="xeonzion" />
         	<beans:property name="password" value="zionxeon" />
     	</beans:bean>
+=======
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <beans:property name="url" value="jdbc:mysql://db4free.net:3306/xeonziondb" />
+        <beans:property name="username" value="xeonzion" />
+        <beans:property name="password" value="zionxeon" />
+    </beans:bean> -->
 </beans:beans>

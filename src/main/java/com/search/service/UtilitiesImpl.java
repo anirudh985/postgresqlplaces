@@ -36,4 +36,10 @@ public class UtilitiesImpl implements Utilities{
 	public ArrayList<SearchLocation> searchMulti(String name, String category) {
 		return searchLocationDao.searchMulti(name, category);
 	}
+
+	@Override
+	public ArrayList<SearchLocation> searchMulti(SearchLocation placeQuery) {
+		return searchLocationDao.searchMulti(placeQuery);
+	}
+
 }

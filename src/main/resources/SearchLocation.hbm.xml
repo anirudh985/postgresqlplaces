@@ -6,7 +6,7 @@
 <hibernate-mapping>
 	<class name="com.search.objects.SearchLocation" table="LOCATION">
 		<id column="int_row_id" name="intRowId" >
-		<generator class="increment"/>
+			<generator class="increment"/>
 		</id>
 		<property name="locName" column="loc_name"/>
 		<property name="category" column="category"/>

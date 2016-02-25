@@ -1,10 +1,9 @@
 package com.search.app;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,8 +37,14 @@ public class AppController {
 		return utilities.search(query);
 	}
 	
-	@RequestMapping(value = "/searchMulti", method = RequestMethod.GET)
-	public @ResponseBody ArrayList<SearchLocation> searchMullti(@RequestParam("name") String name, @RequestParam("category") String category) {
-		return utilities.searchMulti(name, category);
+//	@RequestMapping(value = "/searchMulti", method = RequestMethod.GET)
+//	public @ResponseBody ArrayList<SearchLocation> searchMullti(@RequestParam("name") String name, @RequestParam("category") String category) {
+//		return utilities.searchMulti(name, category);
+//	}
+	
+	@RequestMapping(value = "/searchMulti", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<SearchLocation> searchMullti(@RequestBody SearchLocation placeQuery) {
+		return utilities.searchMulti(placeQuery);
 	}
+
 }
