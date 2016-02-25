@@ -50,7 +50,7 @@
 	
 	    	$("#dataTable > tbody").empty();
 	    	
-	        $.get("http://localhost:8080/app/list", function(data) {
+	        $.get("/list", function(data) {
 	
 	            $.each(data, function(i, place) {
 	
@@ -68,7 +68,7 @@
 	    
 	    $("#dataTable").ready(function() {
 	    	
-	        $.get("http://localhost:8080/app/list", function(data) {
+	        $.get("/list", function(data) {
 	
 	            $.each(data, function(i, place) {
 	                $(".data-contacts-js").append(
@@ -84,7 +84,7 @@
     
     <script type="text/javascript">
     	$("#totalCount").ready(function(){
-    		$.get("http://localhost:8080/app/count", function(data) {
+    		$.get("/count", function(data) {
     			$("#totalCount").append("<span class=\"label label-default\">" + data + "</span>");
     		});
     	});
