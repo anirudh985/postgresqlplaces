@@ -119,6 +119,6 @@
     </beans:bean>
     
      <beans:bean class="java.net.URI" id="dbUrl">
-      <beans:constructor-arg value="${DATABASE_URL}"/>
+      <beans:constructor-arg value="postgres://dsagpnasefpppc:pKpFj_OpQMd2bMfoTo63z3rIhf@ec2-107-20-148-211.compute-1.amazonaws.com:5432/d2p9lk6etjp4ph"/>
      </beans:bean>
 </beans:beans>
