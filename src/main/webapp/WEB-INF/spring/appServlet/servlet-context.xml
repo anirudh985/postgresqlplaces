@@ -46,7 +46,7 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mappingResources">
 			<beans:list>
-				<beans:value>com/search/resources/SearchLocation.hbm.xml</beans:value>
+				<beans:value>SearchLocation.hbm.xml</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
