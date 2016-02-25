@@ -93,7 +93,7 @@
     </beans:bean> -->
     
     
-    <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <!-- <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mappingResources">
 			<beans:list>
@@ -120,5 +120,32 @@
     
      <beans:bean class="java.net.URI" id="dbUrl">
       <beans:constructor-arg value="postgres://dsagpnasefpppc:pKpFj_OpQMd2bMfoTo63z3rIhf@ec2-107-20-148-211.compute-1.amazonaws.com:5432/d2p9lk6etjp4ph"/>
-     </beans:bean>
+     </beans:bean> -->
+     
+     
+     
+      <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mappingResources">
+			<beans:list>
+				<beans:value>com/search/resources/SearchLocation.hbm.xml</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
+				<beans:prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</beans:prop>
+				<beans:prop key="hibernate.connection.url">jdbc:mysql://db4free.net:3306/xeonziondb</beans:prop>
+				<beans:prop key="hibernate.connection.username">xeonzion</beans:prop>
+				<beans:prop key="hibernate.connection.password">zionxeon</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        	<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        	<beans:property name="url" value="jdbc:mysql://db4free.net:3306/xeonziondb" />
+        	<beans:property name="username" value="xeonzion" />
+        	<beans:property name="password" value="zionxeon" />
+    	</beans:bean>
 </beans:beans>
