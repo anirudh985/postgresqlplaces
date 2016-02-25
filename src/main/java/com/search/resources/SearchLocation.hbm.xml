@@ -5,13 +5,13 @@
  
 <hibernate-mapping>
 	<class name="com.search.objects.SearchLocation" table="LOCATION">
-		<id column="INT_ROW_ID" name="intRowId" >
+		<id column="int_row_id" name="intRowId" >
 		<generator class="increment"/>
 		</id>
-		<property name="locName" column="LOC_NAME"/>
-		<property name="category" column="CATEGORY"/>
-		<property name="rating" column="RATING"/>
-		<property name="latitude" column="LATITUDE"/>
-		<property name="longitude" column="LONGITUDE"/>
+		<property name="locName" column="loc_name"/>
+		<property name="category" column="category"/>
+		<property name="rating" column="rating"/>
+		<property name="latitude" column="latitude"/>
+		<property name="longitude" column="longitude"/>
 	</class>
 </hibernate-mapping>
