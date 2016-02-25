@@ -73,7 +73,7 @@
 	    	if(jQuery.trim(searchInput).length > 0){
 	    		jQuery.ajax(
 					{
-	    				url : "/app/searchMulti",
+	    				url : "/searchMulti",
 	    				type: 'POST',
 	    				contentType : "application/json",
 	    				data: JSON.stringify({'locName':searchInput, 'category':searchInput}),
@@ -91,7 +91,7 @@
 	    		);
 	    	} 
 	    	else{
-	    		$.get("/app/list", function(data) {
+	    		$.get("/list", function(data) {
 	    			
 		            $.each(data, function(i, place) {
 		
@@ -108,7 +108,7 @@
 	    
 	    
 	    $("#dataTable").ready(function() {
-	        $.get("/app/list", function(data) {
+	        $.get("/list", function(data) {
 
 	            $.each(data, function(i, place) {
 	                $(".data-contacts-js").append(
@@ -123,7 +123,7 @@
     
     <script type="text/javascript">
     	$("#totalCount").ready(function(){
-    		$.get("/app/count", function(data) {
+    		$.get("/count", function(data) {
     			$("#totalCount").append("<span class=\"label label-default\">" + data + "</span>");
     		});
     	});
