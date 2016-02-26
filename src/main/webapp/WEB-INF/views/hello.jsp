@@ -73,7 +73,7 @@
 	    	if(jQuery.trim(searchInput).length > 0){
 	    		jQuery.ajax(
 					{
-	    				url : "/searchMulti",
+	    				url : "/search/searchMulti",
 	    				type: 'POST',
 	    				contentType : "application/json",
 	    				data: JSON.stringify({'locName':searchInput, 'category':searchInput}),
@@ -83,7 +83,7 @@
 	    		                    "<tr><td>" + place.locName + "</td>" +
 	    		                    "<td>" + place.category + "</td>" +
 	    		                    "<td>" + place.rating + "</td>" +
-	    		                    "<td> <p id='map' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </td></tr>");
+	    		                    "<td> <u> <p id='map' style='cursor: pointer;' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </u> </td></tr>");
 	    		            });	
 	    				},
 	    				error: function() {}
@@ -91,7 +91,7 @@
 	    		);
 	    	} 
 	    	else{
-	    		$.get("/list", function(data) {
+	    		$.get("/search/list", function(data) {
 	    			
 		            $.each(data, function(i, place) {
 		
@@ -99,7 +99,7 @@
 		                    "<tr><td>" + place.locName + "</td>" +
 		                    "<td>" + place.category + "</td>" +
 		                    "<td>" + place.rating + "</td>" +
-		                    "<td> <p id='map' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </td></tr>");
+		                    "<td> <u> <p id='map' style='cursor: pointer;' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </u> </td></tr>");
 		            });
 		        });
 	    	}
@@ -108,14 +108,14 @@
 	    
 	    
 	    $("#dataTable").ready(function() {
-	        $.get("/list", function(data) {
+	        $.get("/search/list", function(data) {
 
 	            $.each(data, function(i, place) {
 	                $(".data-contacts-js").append(
 	                    "<tr><td>" + place.locName + "</td>" +
 	                    "<td>" + place.category + "</td>" +
 	                    "<td>" + place.rating + "</td>" +
-	                    "<td> <p id='map' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </td></tr>");
+	                    "<td> <u> <p id='map' style='cursor: pointer;' onClick=initialize("+place.latitude+","+place.longitude+")> Map </p> </u> </td></tr>");
 	            });
 	        });
 	    });
@@ -123,7 +123,7 @@
     
     <script type="text/javascript">
     	$("#totalCount").ready(function(){
-    		$.get("/count", function(data) {
+    		$.get("/search/count", function(data) {
     			$("#totalCount").append("<span class=\"label label-default\">" + data + "</span>");
     		});
     	});
